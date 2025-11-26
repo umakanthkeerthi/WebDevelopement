@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Caveat:wght@400;700&family=Lobster&family=Monoton&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display+SC:ital,wght@0,400;0,700;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,700&family=Work+Sans:ital,wght@0,400;0,700;1,700&display=swap');
+
+.img {
+    height: 40vh;
+    background-size: cover;
+    background-image: url('https://res.cloudinary.com/dix0rsllh/image/upload/v1764143446/Gemini_Generated_Image_cn1icycn1icycn1i_r4xxmk.png');
+
+
+}
+
+.img1 {
+    height: 125px;
+    width: 180px;
+    border-radius: 5px;
+
+
+}
+
+.H1 {
+    color: #ffffff;
+    padding: 15px;
+    font-family: Roboto;
+}
+
+.h1 {
+    color: #151765;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 3px;
+}
+
+.p {
+    color: #5a7184;
+    font-size: 20px;
+}
+
+.card-sec {
+
+    padding: 10px;
+    margin: 25px;
+
+}
+
+.tedx-sec {
+    background-color: #151765;
+    height: 30vh;
+    background-size: cover;
+}
+
+.detail-veiw-sec-img {
+    height: 180px;
+    margin: 5px;
+}
+
+.detail-h1 {
+    color: #ffffff;
+    font-size: 30px;
+}
+
+.detail-p {
+    color: #ffffff;
+}
+
+.detail-veiw-sec {
+    padding: 40px;
+}
+
+.detail-veiw-sec-text {
+    margin: 5px;
+}
+
+.button {
+    background-color: #151765;
+    color: #ffffff;
+    border-radius: 20px;
+    width: 100px;
+    height: 40px;
+}
