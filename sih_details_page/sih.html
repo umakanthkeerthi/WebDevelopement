@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare in Nabha: The Challenge & A Digital Solution</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="sih.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF7;
+            color: #374151;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 350px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+                max-height: 400px;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="text-xl font-bold text-gray-800">
+                <span class="text-emerald-600">Nabha</span> Health Initiative
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#challenge" class="text-gray-600 hover:text-emerald-600">The Challenge</a>
+                <a href="#solution" class="text-gray-600 hover:text-emerald-600">Our Solution</a>
+                <a href="#impact" class="text-gray-600 hover:text-emerald-600">Impact</a>
+                <a href="#vision" class="text-gray-600 hover:text-emerald-600">Vision</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden flex items-center">
+                <span class="text-2xl">☰</span>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-white">
+            <a href="#challenge" class="block text-center py-2 px-4 text-sm text-gray-700 hover:bg-emerald-50">The Challenge</a>
+            <a href="#solution" class="block text-center py-2 px-4 text-sm text-gray-700 hover:bg-emerald-50">Our Solution</a>
+            <a href="#impact" class="block text-center py-2 px-4 text-sm text-gray-700 hover:bg-emerald-50">Impact</a>
+            <a href="#vision" class="block text-center py-2 px-4 text-sm text-gray-700 hover:bg-emerald-50">Vision</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="challenge" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-3xl md:text-5xl font-bold text-gray-800 leading-tight">A Healthcare Crisis in Rural Nabha</h1>
+                <p class="mt-4 max-w-3xl mx-auto text-lg text-gray-600">
+                    In Nabha and its surrounding areas, accessing timely and effective healthcare is a daily struggle. A severe shortage of medical staff, coupled with logistical challenges, places thousands of lives at risk and hampers the community's well-being. This section outlines the core problems defining this crisis.
+                </p>
+
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="bg-emerald-50 p-8 rounded-xl shadow-sm">
+                        <div id="stat-villages" class="text-5xl font-bold text-emerald-600">0</div>
+                        <p class="mt-2 text-gray-700 font-medium">Villages Served</p>
+                        <p class="text-sm text-gray-500">by a single, understaffed hospital.</p>
+                    </div>
+                    <div class="bg-amber-50 p-8 rounded-xl shadow-sm">
+                        <div id="stat-doctors" class="text-5xl font-bold text-amber-600">0%</div>
+                        <p class="mt-2 text-gray-700 font-medium">Staffing Capacity</p>
+                        <p class="text-sm text-gray-500">The Civil Hospital operates with less than half its sanctioned doctors.</p>
+                    </div>
+                    <div class="bg-sky-50 p-8 rounded-xl shadow-sm">
+                        <div id="stat-internet" class="text-5xl font-bold text-sky-600">0%</div>
+                        <p class="mt-2 text-gray-700 font-medium">Rural Internet Access</p>
+                        <p class="text-sm text-gray-500">in Punjab, creating a digital divide in healthcare access.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Visualizing the Healthcare Gap</h2>
+                    <p class="mt-3 max-w-2xl mx-auto text-lg text-gray-600">
+                        The data reveals critical deficiencies in both medical personnel and digital infrastructure. These charts illustrate the scale of the challenges faced by the rural population of Nabha, highlighting the urgent need for intervention.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg">
+                        <h3 class="text-xl font-semibold text-center text-gray-700">Nabha Civil Hospital Staffing</h3>
+                        <p class="text-center text-sm text-gray-500 mb-4">Only 11 of 23 sanctioned posts are filled.</p>
+                        <div class="chart-container">
+                            <canvas id="doctorsChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg">
+                        <h3 class="text-xl font-semibold text-center text-gray-700">Rural Punjab's Digital Divide</h3>
+                        <p class="text-center text-sm text-gray-500 mb-4">Low internet access necessitates offline solutions.</p>
+                        <div class="chart-container">
+                            <canvas id="internetChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="solution" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Our Solution: A Digital Lifeline</h2>
+                    <p class="mt-3 max-w-2xl mx-auto text-lg text-gray-600">
+                        To bridge the healthcare gap, we propose a comprehensive telemedicine application designed specifically for the challenges of rural India. It combines modern technology with practical, user-centric features to bring healthcare directly to the people who need it most. Click on each feature to learn more.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="feature-card text-center p-6 bg-gray-50 rounded-lg border border-gray-200 cursor-pointer hover:shadow-md hover:border-emerald-300 transition-all">
+                        <div class="text-4xl mb-4">💬</div>
+                        <h3 class="text-lg font-semibold text-gray-800">Multilingual Consultations</h3>
+                        <p class="feature-desc hidden mt-2 text-sm text-gray-600">Connect with doctors via video call in your local language, eliminating communication barriers and the need for travel.</p>
+                    </div>
+                    <div class="feature-card text-center p-6 bg-gray-50 rounded-lg border border-gray-200 cursor-pointer hover:shadow-md hover:border-emerald-300 transition-all">
+                        <div class="text-4xl mb-4">📂</div>
+                        <h3 class="text-lg font-semibold text-gray-800">Offline Health Records</h3>
+                        <p class="feature-desc hidden mt-2 text-sm text-gray-600">Access your complete medical history, prescriptions, and test results anytime, even without an internet connection.</p>
+                    </div>
+                    <div class="feature-card text-center p-6 bg-gray-50 rounded-lg border border-gray-200 cursor-pointer hover:shadow-md hover:border-emerald-300 transition-all">
+                        <div class="text-4xl mb-4">💊</div>
+                        <h3 class="text-lg font-semibold text-gray-800">Pharmacy Locator</h3>
+                        <p class="feature-desc hidden mt-2 text-sm text-gray-600">Get real-time updates on medicine availability at nearby pharmacies, ensuring you don't make a wasted trip.</p>
+                    </div>
+                    <div class="feature-card text-center p-6 bg-gray-50 rounded-lg border border-gray-200 cursor-pointer hover:shadow-md hover:border-emerald-300 transition-all">
+                        <div class="text-4xl mb-4">💡</div>
+                        <h3 class="text-lg font-semibold text-gray-800">AI Symptom Checker</h3>
+                        <p class="feature-desc hidden mt-2 text-sm text-gray-600">An intelligent, low-bandwidth tool to help you understand your symptoms and guide you on the next steps for care.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="impact" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">How Our App Solves Key Problems</h2>
+                    <p class="mt-3 max-w-2xl mx-auto text-lg text-gray-600">
+                        Our telemedicine platform is not just a collection of features; it's a targeted solution designed to directly address the specific hardships faced by the rural residents of Nabha. Here's a clear breakdown of how our technology creates tangible impact.
+                    </p>
+                </div>
+                <div class="max-w-4xl mx-auto space-y-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-4 p-6 bg-white rounded-lg shadow-md">
+                        <div class="md:col-span-1 text-center md:text-left">
+                            <p class="font-semibold text-red-600">The Problem:</p>
+                            <p class="text-gray-700">Long, costly travel & missed work</p>
+                        </div>
+                        <div class="md:col-span-1 text-2xl text-center text-emerald-500">→</div>
+                        <div class="md:col-span-1 text-center md:text-left">
+                            <p class="font-semibold text-emerald-600">Our Solution:</p>
+                            <p class="text-gray-700">Instant video consultations from home</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-4 p-6 bg-white rounded-lg shadow-md">
+                        <div class="md:col-span-1 text-center md:text-left">
+                            <p class="font-semibold text-red-600">The Problem:</p>
+                            <p class="text-gray-700">Specialists are often unavailable</p>
+                        </div>
+                        <div class="md:col-span-1 text-2xl text-center text-emerald-500">→</div>
+                        <div class="md:col-span-1 text-center md:text-left">
+                            <p class="font-semibold text-emerald-600">Our Solution:</p>
+                            <p class="text-gray-700">Access to a wider network of doctors</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-4 p-6 bg-white rounded-lg shadow-md">
+                        <div class="md:col-span-1 text-center md:text-left">
+                            <p class="font-semibold text-red-600">The Problem:</p>
+                            <p class="text-gray-700">Medicines out of stock</p>
+                        </div>
+                        <div class="md:col-span-1 text-2xl text-center text-emerald-500">→</div>
+                        <div class="md:col-span-1 text-center md:text-left">
+                            <p class="font-semibold text-emerald-600">Our Solution:</p>
+                            <p class="text-gray-700">Real-time pharmacy stock updates</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-4 p-6 bg-white rounded-lg shadow-md">
+                        <div class="md:col-span-1 text-center md:text-left">
+                            <p class="font-semibold text-red-600">The Problem:</p>
+                            <p class="text-gray-700">Poor internet connectivity</p>
+                        </div>
+                        <div class="md:col-span-1 text-2xl text-center text-emerald-500">→</div>
+                        <div class="md:col-span-1 text-center md:text-left">
+                            <p class="font-semibold text-emerald-600">Our Solution:</p>
+                            <p class="text-gray-700">Offline health records & low-bandwidth AI</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="vision" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800">A Scalable Vision for a Healthier India</h2>
+                    <p class="mt-3 max-w-2xl mx-auto text-lg text-gray-600">
+                        Our initiative in Nabha is just the beginning. The solution is built to be scalable, aligning with the rapid growth of telemedicine in India. This vision extends beyond one region, aiming to create a blueprint for accessible rural healthcare nationwide.
+                    </p>
+                </div>
+                <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg max-w-4xl mx-auto">
+                    <h3 class="text-xl font-semibold text-center text-gray-700">Telemedicine Adoption in India (2020-2025)</h3>
+                    <p class="text-center text-sm text-gray-500 mb-4">Projected CAGR of 31%</p>
+                    <div class="relative w-full mx-auto" style="height: 300px; max-height: 400px;">
+                        <canvas id="growthChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p>&copy; 2024 Nabha Health Initiative. A proposal for a healthier future.</p>
+            <p class="text-sm text-gray-400 mt-2">This interactive report was generated to highlight a critical healthcare issue and propose a viable technological solution.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            const featureCards = document.querySelectorAll('.feature-card');
+            featureCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const desc = card.querySelector('.feature-desc');
+                    desc.classList.toggle('hidden');
+                });
+            });
+
+            function animateValue(obj, start, end, duration) {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    const value = Math.floor(progress * (end - start) + start);
+                    obj.innerHTML = value.toLocaleString() + (obj.id.includes('doctors') || obj.id.includes('internet') ? '%' : '');
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        if (el.id === 'stat-villages') animateValue(el, 0, 173, 1500);
+                        if (el.id === 'stat-doctors') animateValue(el, 0, 48, 1500);
+                        if (el.id === 'stat-internet') animateValue(el, 0, 31, 1500);
+                        observer.unobserve(el);
+                    }
+                });
+            }, {
+                threshold: 0.5
+            });
+
+            observer.observe(document.getElementById('stat-villages'));
+            observer.observe(document.getElementById('stat-doctors'));
+            observer.observe(document.getElementById('stat-internet'));
+
+
+            const doctorsCtx = document.getElementById('doctorsChart').getContext('2d');
+            new Chart(doctorsCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Actual Doctors', 'Vacant Posts'],
+                    datasets: [{
+                        data: [11, 12],
+                        backgroundColor: ['#10B981', '#F87171'],
+                        borderColor: '#FFFFFF',
+                        borderWidth: 4,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.raw} (${((context.raw / 23) * 100).toFixed(1)}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const internetCtx = document.getElementById('internetChart').getContext('2d');
+            new Chart(internetCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['With Internet Access', 'Without Internet Access'],
+                    datasets: [{
+                        data: [31, 69],
+                        backgroundColor: ['#3B82F6', '#E5E7EB'],
+                        borderColor: '#FFFFFF',
+                        borderWidth: 4,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.raw}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const growthCtx = document.getElementById('growthChart').getContext('2d');
+            new Chart(growthCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2020', '2021', '2022', '2023', '2024', '2025'],
+                    datasets: [{
+                        label: 'Telemedicine Market Index',
+                        data: [100, 131, 171.6, 224.8, 294.5, 385.8],
+                        fill: true,
+                        backgroundColor: 'rgba(22, 163, 74, 0.1)',
+                        borderColor: '#16A34A',
+                        tension: 0.4,
+                        pointBackgroundColor: '#16A34A',
+                        pointRadius: 5,
+                        pointHoverRadius: 7
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + ' (Index)';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                        },
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
